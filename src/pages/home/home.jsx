@@ -1,9 +1,9 @@
 import './home.css';
-import Lottie from "lottie-react";
-import animation from "./landingAnimation.json";
+// import Lottie from "lottie-react";
+// import animation from "./landingAnimation.json";
 import { motion } from 'framer-motion';
 //  import Typewriter from 'typewriter-effect';
-import Gif1 from "./gif1.json";
+// import Gif1 from "./gif1.json";
 
 const Home = () => {
     return (
@@ -60,11 +60,11 @@ const Home = () => {
                     animate={{ opacity: 1, x: 0 }} 
                     transition={{ duration: 1 }}
                 >
-                    <Lottie 
+                    {/* <Lottie 
                         animationData={Gif1} 
                         loop={true} 
                         style={{ width: '400px', height: '400px' }}  // Adjust size here
-                    />
+                    /> */}
                 </motion.div>
             </div>
 

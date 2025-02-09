@@ -29,7 +29,7 @@ const GoogleAuth = () => {
   return (
     <div className=" text-white ">
       {/* <h2>Google Authentication</h2> */}
-      <a href={authUrl}>
+      <a href={authUrl} className="flex">
         <img src='/google.svg' width='35px' />
         <button>Login with Google</button>
       </a>
