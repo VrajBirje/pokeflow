@@ -2,7 +2,7 @@ import './home.css';
 import Lottie from "lottie-react";
 import animation from "./landingAnimation.json";
 import { motion } from 'framer-motion';
-import Typewriter from 'typewriter-effect';
+// import Typewriter from 'typewriter-effect';
 import Gif1 from "./gif1.json";
 
 const Home = () => {
@@ -32,14 +32,14 @@ const Home = () => {
                     </motion.h1>
 
                     <div className="typewriter-container">
-                        <Typewriter
+                        {/* <Typewriter
                             options={{
                                 strings: ['Automate Your Workflows', 'No Code Needed!', 'Save Hours of Work', 'Effortless Task Management', 'Boost Your Productivity'],
                                 autoStart: true,
                                 loop: true,
                                 delay: 50,
                             }}
-                        />
+                        /> */}
                     </div>
                     <p className="desc">
                         Connect your favorite apps, automate tasks, and save hours of manual work with a simple drag-and-drop interface. No coding required!
