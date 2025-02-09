@@ -1,0 +1,13 @@
+.add-dash{
+    display: flex;
+    background-color: #dcc66f;
+    /* gap: 6px; */
+    align-items: center;
+    justify-content: space-between;
+}
+.content1{
+    color: white;
+}
+.body{
+    background-color:  rgb(34, 32, 32);
+}

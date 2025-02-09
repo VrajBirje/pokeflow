@@ -1,0 +1,147 @@
+body {
+    background-color: #6b4e2f;
+    margin: 0;
+    font-family: 'Alata', sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    height: 80px;
+    background-color: #F1E0C6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    border-radius: 5px;
+}
+
+.heading {
+    color: #775837;
+    font-size: 30px;
+}
+
+.dash {
+    color: #775837;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 2px solid #775837;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
+}
+
+.dash:hover {
+    background-color: #775837;
+    color: #F1E0C6;
+}
+
+/* Main Section */
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 10vw;
+}
+
+.main-text {
+    width: 50%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tagline {
+    font-size: 60px;
+}
+
+.typewriter-container {
+    font-size: 22px;
+    font-weight: bold;
+    color: #F1E0C6;
+}
+
+/* CTA Button */
+.cta-button {
+    /* display: inline-block; */
+    padding: 15px 30px;
+    background-color: #F1E0C6;
+    color: #775837;
+    font-size: 18px;
+    font-weight: bold;
+    width:200px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #d5c0a0;
+}
+
+/* Lottie Animation */
+.lottie {
+    width: 40%;
+    padding: 10px;
+    border: 4px solid transparent;
+    border-radius: 20px;
+    margin-left: auto;
+}
+
+/* Features Section */
+.features {
+    text-align: center;
+    padding: 50px 10vw;
+    background-color: #F1E0C6;
+    color: #775837;
+    border-radius: 10px;
+    margin-top: 40px;
+}
+
+.feature-heading {
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.feature-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: nowrap;
+}
+
+.feature-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 23%;
+    text-align: center;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #6b4e2f;
+    color: #F1E0C6;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: nowrap;
+    margin-top: 10px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #F1E0C6;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #d4af89;
+}

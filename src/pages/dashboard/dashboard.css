@@ -1,0 +1,11 @@
+.add-dash {
+    display: flex;
+    /* background-color: #ffffff; */
+    /* gap: 6px; */
+    align-items: center;
+    justify-content: space-between;
+}
+
+.body {
+    background-color: #6b4e2f;
+}

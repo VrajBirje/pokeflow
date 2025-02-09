@@ -1,0 +1,32 @@
+.sidebar {
+    background-color:#F1E0C6;
+    color: #6b4e2f;
+    padding: 20px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.dash-items {
+    color: #6b4e2f;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    font-weight: 600;
+    font-size: 18px;
+    gap: 25px;
+}
+.dash-1{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.content{
+    display: flex;
+    align-items:center;
+    gap:10px;
+    width: 100%;
+}
