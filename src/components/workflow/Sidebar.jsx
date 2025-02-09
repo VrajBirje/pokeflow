@@ -38,7 +38,7 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className='sidebar-2 w-[17%] h-[100%] text-white p-4'>
+    <aside className='sidebar-2 w-[100%] text-white p-4 flex flex-col items-center'>
       <h3 className="text-lg font-semibold mb-4">Drag & Drop Nodes</h3>
       <div className="dndnode email" onDragStart={(event) => onDragStart(event, 'Email')} draggable>
         <button className='flow-btn flex items-center justify-center gap-2'>

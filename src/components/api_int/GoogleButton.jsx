@@ -10,7 +10,7 @@ const GoogleButton = () => {
       <button onClick={logout}>Logout</button>
     </div>
   ) : (
-    <a href="/google_int">
+    <a href="/email">
       <button>Login with Google</button>
     </a>
   );

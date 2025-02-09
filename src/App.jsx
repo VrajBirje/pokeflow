@@ -12,6 +12,9 @@ import AddDashboard from './pages/dashboard/Add';
 import { GoogleProvider } from "./components/api_int/GoogleContext";
 import GoogleAuth from "./components/api_int/GoogleAuth";
 import Gmail from './pages/gmail/gmail';
+import BillScanner from './pages/dashboard/bill-scanner';
+import Inventory from './pages/dashboard/inventory';
+import ConnectedApps from './pages/dashboard/connected-apps';
 // import GoogleButton from "./components/api_int/GoogleButton";
 // import GmailAttachmentViewer from './pages/gmail/gmail';
 
@@ -40,18 +43,21 @@ function App() {
         <SignedIn>
           <RedirectAfterSignIn />
           <Routes>
-          <Route path="/google_int" element={<GoogleAuth />} />
-          <Route path="/email" element={<Gmail/>} />
+            <Route path="/google_int" element={<GoogleAuth />} />
+            <Route path="/email" element={<Gmail />} />
+            <Route path="/bill" element={<BillScanner />} />
+            <Route path="/inventory" element={<Inventory />} />
+            <Route path="/connnectedapps" element={<ConnectedApps />} />
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<>hello</>} />
-            <Route path="/dashboard" element={<Dashboard/>} />
-            <Route path="/dashboard/add" element={<AddDashboard/>} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard/add" element={<AddDashboard />} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>
         </SignedIn>
       </Router>
-      </GoogleProvider>
+    </GoogleProvider>
   );
 }
 

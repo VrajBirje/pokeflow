@@ -1,9 +1,9 @@
 import './home.css';
-// import Lottie from "lottie-react";
-// import animation from "./landingAnimation.json";
+import Lottie from "lottie-react";
+import animation from "./landingAnimation.json";
 import { motion } from 'framer-motion';
-//  import Typewriter from 'typewriter-effect';
-// import Gif1 from "./gif1.json";
+import Typewriter from 'typewriter-effect';
+import Gif1 from "./gif1.json";
 
 const Home = () => {
     return (
@@ -32,21 +32,21 @@ const Home = () => {
                     </motion.h1>
 
                     <div className="typewriter-container">
-                        {/* <Typewriter
+                        <Typewriter
                             options={{
                                 strings: ['Automate Your Workflows', 'No Code Needed!', 'Save Hours of Work', 'Effortless Task Management', 'Boost Your Productivity'],
                                 autoStart: true,
                                 loop: true,
                                 delay: 50,
                             }}
-                        /> */}
+                        />
                     </div>
                     <p className="desc">
                         Connect your favorite apps, automate tasks, and save hours of manual work with a simple drag-and-drop interface. No coding required!
                     </p>
                     <motion.a 
                         href="/dashboard" 
-                        className="cta-button"
+                        className="cta-button text-center"
                         whileHover={{ scale: 1.1 }} 
                         whileTap={{ scale: 0.9 }}
                     >
@@ -60,11 +60,11 @@ const Home = () => {
                     animate={{ opacity: 1, x: 0 }} 
                     transition={{ duration: 1 }}
                 >
-                    {/* <Lottie 
+                    <Lottie 
                         animationData={Gif1} 
                         loop={true} 
                         style={{ width: '400px', height: '400px' }}  // Adjust size here
-                    /> */}
+                    />
                 </motion.div>
             </div>
 

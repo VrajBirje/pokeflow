@@ -11,6 +11,7 @@ import Paper from '@mui/material/Paper';
 import { IoIosAddCircle } from "react-icons/io";
 import './dashboard.css';
 
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: "gray",
@@ -30,34 +31,16 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-const Dashboard = () => {
+const Inventory= () => {
     const [workflows, setWorkflows] = useState([]);
 
-    // Fetch all workflows from API
-    useEffect(() => {
-        const fetchWorkflows = async () => {
-            try {
-                const response = await fetch('http://localhost:5000/api/workflows/all');
-                const data = await response.json();
-                if (response.ok) {
-                    setWorkflows(data.data); // Assuming API returns { data: [...] }
-                } else {
-                    console.error("Error fetching workflows:", data.error);
-                }
-            } catch (error) {
-                console.error("Error fetching workflows:", error);
-            }
-        };
-
-        fetchWorkflows();
-    }, []);
 
     return (
         <div className='w-[100vw] h-[100vh] flex gap-0 items-center'>
             <Sidebar />
             <div className='body w-[80%] h-[100vh] px-20 py-10'>
                 <div className='w-[100%] font-bold mb-10 flex justify-start items-center text-3xl text-[#F1E0C6]'>
-                    Dashboard
+                    Inventory
                 </div>
                 <div className='add-btn w-[100%] mb-10 flex justify-end items-center'>
                     <a href='/dashboard/add' className='add-dash rounded-md w-[80px] text-center px-3 py-2 bg-[#6b4e2f] text-black'>
@@ -69,12 +52,10 @@ const Dashboard = () => {
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
                         <TableHead>
                             <TableRow>
-                                <StyledTableCell align="left">Flow ID</StyledTableCell>
-                                <StyledTableCell align="left">Flow 1</StyledTableCell>
-                                <StyledTableCell align="left">Flow 2</StyledTableCell>
-                                <StyledTableCell align="left">Flow 3</StyledTableCell>
-                                <StyledTableCell align="left">Flow 4</StyledTableCell>
-                                <StyledTableCell align="left">Created by</StyledTableCell>
+                                <StyledTableCell align="left">ID</StyledTableCell>
+                                <StyledTableCell align="left">Name</StyledTableCell>
+                                <StyledTableCell align="left">Quantity</StyledTableCell>
+                                <StyledTableCell align="left">Created at</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -106,4 +87,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default Inventory;

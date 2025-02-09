@@ -15,6 +15,8 @@
 .mail{
     display: flex;
     color: white;
+    gap: 90px;
+    justify-content: center;
 }
 
 .mail-btn {
@@ -24,7 +26,6 @@
     height: 30px;
     /* text-align: center; */
     justify-content:center;
-    width: 120px;
     color: var(--gray);
     font-size: 15px;
     font-weight: 500;
@@ -32,6 +33,6 @@
     border-radius: 6px;
     cursor: pointer;
     display: flex;
-    gap: 10px;
+    gap: 30px;
     align-items: center;
   }

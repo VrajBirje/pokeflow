@@ -134,7 +134,7 @@ import {
     useReactFlow,
     Background,
 } from '@xyflow/react';
-
+import { fetchEmails, downloadAttachment, uploadToDrive, writeToSheet ,addEventToCalendar } from '../../components/GoogleApi';
 import '@xyflow/react/dist/style.css';
 import Sidebar from './Sidebar';
 import { DnDProvider, useDnD } from './DnDContext';
@@ -154,6 +154,62 @@ const DnDFlow = () => {
     const { screenToFlowPosition } = useReactFlow();
     const [type] = useDnD();
 
+    const [waitingForAttachment, setWaitingForAttachment] = useState(false);
+
+    const checkForNewEmails = async () => {
+        const token = localStorage.getItem("google_access_token");
+        if (!token) {
+            alert("Please authenticate with Google first.");
+            return;
+        }
+
+        let hasAttachments = false;
+
+        while (!hasAttachments) {
+            console.log("Checking for new emails...");
+            const emails = await fetchEmails(token);
+
+            const emailWithAttachment = emails.find(email => email.attachments?.length > 0);
+
+            if (emailWithAttachment) {
+                hasAttachments = true;
+                console.log("Attachment found! Downloading...");
+                let emailText = emailWithAttachment.body || "No text available"; // Extract email body
+                let emailSubject = emailWithAttachment.subject || "No Subject";
+                let emailDate = new Date(emailWithAttachment.date); // Convert received date
+                for (const attachment of emailWithAttachment.attachments) {
+                    const fileData = await downloadAttachment(token, emailWithAttachment.id, attachment.id, attachment.filename);
+
+                    console.log("Uploading to Drive...");
+                    const driveFileId = await uploadToDrive(token, attachment.filename, fileData);
+
+                    console.log(`File uploaded to Drive: ${driveFileId}`);
+
+                    // If attachment is a text file, extract text and save to Sheets
+                    if (attachment.filename.endsWith('.txt')) {
+                        const textContent = new TextDecoder().decode(fileData);
+                        console.log("Saving text to Google Sheets...");
+                        await writeToSheet(token, [[attachment.filename, textContent]]);
+                    }
+                }
+                console.log("Saving email content to Google Sheets...");
+                await writeToSheet(token, [[emailWithAttachment.subject || "No Subject", emailText]]);
+                console.log("Adding event to Google Calendar...");
+                await addEventToCalendar(token, emailSubject, emailDate);
+
+                alert("Attachment processed successfully!");
+                setWaitingForAttachment(false);
+            } else {
+                console.log("No attachments yet, waiting...");
+                await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 10 sec before rechecking
+            }
+        }
+    };
+
+    const handleMailClick = () => {
+        setWaitingForAttachment(true);
+        checkForNewEmails();
+    };
     // Function to send data to API when the button is clicked
     const sendDataToAPI = async () => {
         try {
@@ -189,7 +245,10 @@ const DnDFlow = () => {
             if (!response.ok) {
                 console.error("API call failed");
             } else {
-                console.log("API call successful");
+                alert("API call successful");
+                if (payload.flow1 === "Email" && payload.flow2 === "Drive") {
+                    handleMailClick();
+                }
             }
         } catch (error) {
             console.error("Error calling API:", error);
@@ -244,14 +303,17 @@ const DnDFlow = () => {
             </div>
 
             {/* Send Button */}
-            <button
-                className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                onClick={sendDataToAPI}
-            >
-                Send
-            </button>
 
-            <Sidebar />
+
+            <div className='w-[20%] h-[100%] flex flex-col items-center '>
+                <Sidebar />
+                <button
+                    className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                    onClick={sendDataToAPI}
+                >
+                    Send
+                </button>
+            </div>
         </div>
     );
 };
