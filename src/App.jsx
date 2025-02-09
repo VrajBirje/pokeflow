@@ -6,7 +6,7 @@ import Home from './pages/home/home';
 import SignInPage from "./Signin"
 import Dashboard from './pages/dashboard/dashboard';
 import AddDashboard from './pages/dashboard/Add';
-import AddDashboard2 from './pages/dashboard/add2';
+// import AddDashboard2 from './pages/dashboard/add2';
 // import DnDFlowWrapper from './components/workflow/workflow';
 // import Workflow from './workflow';
 import { GoogleProvider } from "./components/api_int/GoogleContext";
@@ -46,7 +46,6 @@ function App() {
             <Route path="/about" element={<>hello</>} />
             <Route path="/dashboard" element={<Dashboard/>} />
             <Route path="/dashboard/add" element={<AddDashboard/>} />
-            <Route path="/dashboard/add2" element={<AddDashboard2/>} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>

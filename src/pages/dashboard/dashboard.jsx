@@ -1,5 +1,5 @@
-import React from 'react'
-import Sidebar from '../../components/sidebar/sidebar'
+import React, { useEffect, useState } from 'react';
+import Sidebar from '../../components/sidebar/sidebar';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,7 +10,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { IoIosAddCircle } from "react-icons/io";
 import './dashboard.css';
-
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -26,26 +25,33 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
         backgroundColor: theme.palette.action.hover,
     },
-    // hide last border
     '&:last-child td, &:last-child th': {
         border: 0,
     },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
-
 const Dashboard = () => {
+    const [workflows, setWorkflows] = useState([]);
+
+    // Fetch all workflows from API
+    useEffect(() => {
+        const fetchWorkflows = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/workflows/all');
+                const data = await response.json();
+                if (response.ok) {
+                    setWorkflows(data.data); // Assuming API returns { data: [...] }
+                } else {
+                    console.error("Error fetching workflows:", data.error);
+                }
+            } catch (error) {
+                console.error("Error fetching workflows:", error);
+            }
+        };
+
+        fetchWorkflows();
+    }, []);
+
     return (
         <div className='w-[100vw] h-[100vh] flex gap-0 items-center'>
             <Sidebar />
@@ -58,42 +64,44 @@ const Dashboard = () => {
                         <IoIosAddCircle size={23} />
                         Add
                     </a>
-                    {/* <a href='/dashboard/add2' className='add-dash rounded-md w-[80px] text-center px-3 py-2 bg-white text-black'>
-                        <IoIosAddCircle size={23} />
-                        Add2
-                    </a> */}
                 </div>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
                         <TableHead>
                             <TableRow>
-                                {/* <StyledTableCell>Dessert (100g serving)</StyledTableCell> */}
-                                <StyledTableCell align="right">Flow id</StyledTableCell>
-                                <StyledTableCell align="right">Flow1&nbsp;(g)</StyledTableCell>
-                                <StyledTableCell align="right">Flow2&nbsp;(g)</StyledTableCell>
-                                <StyledTableCell align="right">Flow3&nbsp;(g)</StyledTableCell>
-                                <StyledTableCell align="right">Created by&nbsp;(g)</StyledTableCell>
+                                <StyledTableCell align="left">Flow ID</StyledTableCell>
+                                <StyledTableCell align="left">Flow 1</StyledTableCell>
+                                <StyledTableCell align="left">Flow 2</StyledTableCell>
+                                <StyledTableCell align="left">Flow 3</StyledTableCell>
+                                <StyledTableCell align="left">Created by</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map((row) => (
-                                <StyledTableRow key={row.name}>
-                                    <StyledTableCell component="th" scope="row">
-                                        {row.name}
+                            {workflows.length > 0 ? (
+                                workflows.map((workflow) => (
+                                    <StyledTableRow key={workflow.id}>
+                                        <StyledTableCell component="th" scope="row">
+                                            {workflow.id}
+                                        </StyledTableCell>
+                                        <StyledTableCell align="left">{workflow.flow1 || "-"}</StyledTableCell>
+                                        <StyledTableCell align="left">{workflow.flow2 || "-"}</StyledTableCell>
+                                        <StyledTableCell align="left">{workflow.flow3 || "-"}</StyledTableCell>
+                                        <StyledTableCell align="left">{workflow.created_by}</StyledTableCell>
+                                    </StyledTableRow>
+                                ))
+                            ) : (
+                                <StyledTableRow>
+                                    <StyledTableCell colSpan={5} align="center">
+                                        No workflows found.
                                     </StyledTableCell>
-                                    <StyledTableCell align="right">{row.calories}</StyledTableCell>
-                                    <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                                    <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
                                 </StyledTableRow>
-                            ))}
+                            )}
                         </TableBody>
                     </Table>
                 </TableContainer>
-
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Dashboard
+export default Dashboard;

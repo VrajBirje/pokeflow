@@ -4,6 +4,7 @@ import { HiChartPie } from "react-icons/hi";
 import { MdInventory } from "react-icons/md";
 import { FaAngleRight } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
+import { HiMenu } from "react-icons/hi";
 import { fetchEmails, downloadAttachment } from '../GoogleApi'; // Ensure correct path
 import './sidebar.css';
 
@@ -47,8 +48,11 @@ const Sidebar = () => {
 
     return (
         <div className='sidebar w-[20%] h-[100vh] text-white'>
+            <div className='s-head'>
+                <HiMenu size={25} />
                 <h2 className="heading text-4xl font-bold">Taskify</h2>
-                <div className='dash-items'>
+            </div>
+            <div className='dash-items'>
                 <a href="/dashboard" className='dash-1'>
                     <div className='content'>
                         <HiChartPie size={25} />

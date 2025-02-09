@@ -41,17 +41,30 @@ export default function Sidebar() {
     <aside className='sidebar-2 w-[17%] h-[100%] text-white p-4'>
       <h3 className="text-lg font-semibold mb-4">Drag & Drop Nodes</h3>
       <div className="dndnode email" onDragStart={(event) => onDragStart(event, 'Email')} draggable>
-        <button className='flow-btn'>Email</button>
+        <button className='flow-btn flex items-center justify-center gap-2'>
+          <img src='/gmail.svg' className='h-[90%]' alt='' />
+          Email
+        </button>
       </div>
       <div className="dndnode drive" onDragStart={(event) => onDragStart(event, 'Drive')} draggable>
-        <button className='flow-btn'>Drive</button>
+        <button className='flow-btn'>
+          <img src='/drive.svg' className='h-[90%]' alt='' />
+          Drive
+        </button>
       </div>
       <div className="dndnode calendar" onDragStart={(event) => onDragStart(event, 'Calendar')} draggable>
-        <button className='flow-btn'>Calendar</button>
+        <button className='flow-btn'>
+          <img src='/calendar.svg' className='h-[90%]' alt='' />
+          Calendar
+        </button>
       </div>
       <div className="dndnode spreadsheet" onDragStart={(event) => onDragStart(event, 'Spreadsheet')} draggable>
-        <button className='flow-btn'>Spreadsheet</button>
+        <button className='flow-btn'>
+          <img src='/sheets.svg' className='h-[90%]' alt='' />
+          Spreadsheet
+        </button>
       </div>
+
     </aside>
   );
 }

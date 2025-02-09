@@ -11,3 +11,8 @@
 .body{
     background-color:  rgb(34, 32, 32);
 }
+
+.mail{
+    display: flex;
+    color: white;
+}

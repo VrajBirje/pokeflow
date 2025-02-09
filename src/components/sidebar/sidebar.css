@@ -2,11 +2,18 @@
     background-color:#F1E0C6;
     color: #6b4e2f;
     padding: 20px;
+    /* align-items: center; */
     display: flex;
     justify-content: start;
-    align-items: center;
     flex-direction: column;
     gap: 35px;
+}
+
+.s-head{
+    display: flex;
+    align-items: center;
+    justify-content:start;
+    gap: 20px;
 }
 
 .dash-items {

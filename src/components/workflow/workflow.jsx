@@ -122,7 +122,6 @@
 // );
 
 // export default DnDFlowWrapper;
-
 import React, { useRef, useCallback, useState } from 'react';
 import './workflow.css';
 import {
@@ -139,6 +138,7 @@ import {
 import '@xyflow/react/dist/style.css';
 import Sidebar from './Sidebar';
 import { DnDProvider, useDnD } from './DnDContext';
+import { useUser } from "@clerk/clerk-react";
 
 const initialNodes = [];
 
@@ -146,46 +146,86 @@ let id = 0;
 const getId = () => `dndnode_${id++}`;
 
 const DnDFlow = () => {
+    const { user } = useUser();
+    const name = user?.firstName || "User";
     const reactFlowWrapper = useRef(null);
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
     const { screenToFlowPosition } = useReactFlow();
     const [type] = useDnD();
 
-    const onConnect = useCallback(
-        (params) => setEdges((eds) => addEdge(params, eds)),
-        []
-    );
+    // Function to send data to API when the button is clicked
+    const sendDataToAPI = async () => {
+        try {
+            const connectedNodes = edges
+                .map(edge => {
+                    const sourceNode = nodes.find(n => n.id === edge.source);
+                    const targetNode = nodes.find(n => n.id === edge.target);
+                    return [sourceNode, targetNode];
+                })
+                .flat()
+                .filter(node => node && node.data && node.data.label); // Ensure node and label exist
+
+            if (connectedNodes.length === 0) {
+                console.warn("No connected nodes to send.");
+                return;
+            }
+
+            const payload = connectedNodes.reduce((acc, node, index) => {
+                acc[`flow${index + 1}`] = node.data.label;
+                return acc;
+            }, { created_by: name });
+
+            console.log("Sending Payload:", payload);
+
+            const response = await fetch('http://localhost:5000/api/workflows/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) {
+                console.error("API call failed");
+            } else {
+                console.log("API call successful");
+            }
+        } catch (error) {
+            console.error("Error calling API:", error);
+        }
+    };
+
+    const onConnect = useCallback((params) => {
+        setEdges((eds) => addEdge(params, eds));
+    }, []);
 
     const onDragOver = useCallback((event) => {
         event.preventDefault();
         event.dataTransfer.dropEffect = 'move';
     }, []);
 
-    const onDrop = useCallback(
-        (event) => {
-            event.preventDefault();
-            if (!type) return;
+    const onDrop = useCallback((event) => {
+        event.preventDefault();
+        if (!type) return;
 
-            const position = screenToFlowPosition({
-                x: event.clientX,
-                y: event.clientY,
-            });
+        const position = screenToFlowPosition({
+            x: event.clientX,
+            y: event.clientY,
+        });
 
-            const newNode = {
-                id: getId(),
-                type: 'default',
-                position,
-                data: { label: type }, // Set label based on type
-            };
+        const newNode = {
+            id: getId(),
+            type: 'default',
+            position,
+            data: { label: type }, // Set label based on type
+        };
 
-            setNodes((nds) => [...nds, newNode]);
-        },
-        [screenToFlowPosition, type]
-    );
+        setNodes((nds) => [...nds, newNode]);
+    }, [screenToFlowPosition, type]);
 
     return (
-        <div className="dndflow w-[100%] h-[90%] flex">
+        <div className="dndflow w-[100%] h-[90%] flex items-center">
             <div className="reactflow-wrapper w-[80%] h-[100%]" ref={reactFlowWrapper}>
                 <ReactFlow
                     nodes={nodes}
@@ -202,6 +242,15 @@ const DnDFlow = () => {
                     <Background />
                 </ReactFlow>
             </div>
+
+            {/* Send Button */}
+            <button
+                className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                onClick={sendDataToAPI}
+            >
+                Send
+            </button>
+
             <Sidebar />
         </div>
     );

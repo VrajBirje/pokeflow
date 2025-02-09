@@ -2,7 +2,7 @@ import './home.css';
 import Lottie from "lottie-react";
 import animation from "./landingAnimation.json";
 import { motion } from 'framer-motion';
-// import Typewriter from 'typewriter-effect';
+//  import Typewriter from 'typewriter-effect';
 import Gif1 from "./gif1.json";
 
 const Home = () => {
@@ -60,7 +60,11 @@ const Home = () => {
                     animate={{ opacity: 1, x: 0 }} 
                     transition={{ duration: 1 }}
                 >
-                    <Lottie animationData={Gif1} loop={true} />
+                    <Lottie 
+                        animationData={Gif1} 
+                        loop={true} 
+                        style={{ width: '400px', height: '400px' }}  // Adjust size here
+                    />
                 </motion.div>
             </div>
 
@@ -95,6 +99,7 @@ const Home = () => {
                 </div>
             </motion.div>
 
+
             {/* Footer */}
             <motion.footer 
                 className="footer"
@@ -107,7 +112,7 @@ const Home = () => {
                     <a href="#">Privacy Policy</a>
                     <a href="#">Terms of Service</a>
                     <a href="#">Contact Us</a>
-                    <a href="#">About Us</a>
+                    <a href="#">About Us</a> {/* Link to About Us section */}
                     <a href="#">Help Center</a>
                 </div>
             </motion.footer>

@@ -61,6 +61,18 @@ body {
     color: #F1E0C6;
 }
 
+.about-card {
+    background-color: white; /* Same as feature cards */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    text-align: center;
+    margin: 40px auto; /* Centers the card */
+    color: #775837; /* Matching the theme */
+}
+
+
 /* CTA Button */
 .cta-button {
     /* display: inline-block; */
@@ -80,9 +92,11 @@ body {
 }
 
 /* Lottie Animation */
+
 .lottie {
-    width: 40%;
-    padding: 10px;
+    width: 400px;  /* Adjust as needed */
+    height: 400px;
+    padding:0;
     border: 4px solid transparent;
     border-radius: 20px;
     margin-left: auto;

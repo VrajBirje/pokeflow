@@ -71,10 +71,10 @@ const Gmail = () => {
         <div className='w-[100%] font-bold mb-10 flex justify-start items-center text-3xl text-white'>
           Gmail
         </div>
-        <div className='add-btn w-[100%] mb-10 flex justify-end items-center'>
+        <div className='mail w-[100%] mb-10 flex justify-end items-center'>
           <button onClick={handleMailClick} className='dash-1 cursor-pointer'>
             <div className='content '>
-              <IoMdMail size={24} />
+             <img src='/gmail.svg'/>
               Mail
             </div>
           </button>
