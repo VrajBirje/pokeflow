@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 const GoogleAuth = () => {
   const [authUrl, setAuthUrl] = useState("");
   const navigate = useNavigate();
@@ -27,7 +26,7 @@ const GoogleAuth = () => {
   }, [navigate]);
 
   return (
-    <div className=" text-white ">
+    <div className="mail-btn text-white ">
       {/* <h2>Google Authentication</h2> */}
       <a href={authUrl} className="flex">
         <img src='/google.svg' width='35px' />

@@ -4,6 +4,7 @@ import moment from "moment"; // Install moment.js for date validation: npm insta
 import axios from "axios";
 import Modal from "react-modal";
 import { toast } from "react-hot-toast";
+import './ocr.css'
 
 const ItemModal = ({ show, setShow }) => {
   const [formData, setFormData] = useState({
@@ -362,7 +363,7 @@ const OCRScanner = () => {
         />
         <button
           onClick={handleScan}
-          className=" scan-btn w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
+          className="scan-btn"
         >
           {loading ? "Scanning..." : "Scan Bill"}
         </button>
